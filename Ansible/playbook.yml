@@ -1,0 +1,41 @@
+- name: Installation de Symfony
+  hosts: localhost 
+  remote_user: root 
+  vars:
+    - server_port: 8080
+  tasks: 
+    - ping: ~
+    - name: Installer Git
+      apt: name=git state=latest
+    
+    - name: Installation du package
+      apt: 
+      with_items:
+        - apache2
+        - libapache2-mod-php7.0
+        - php7.0
+        - php7.0-fpm
+        - php7.0-mysql
+        - php7.0-curl
+        - curl
+        - php7.0-mbstring
+        - php7.0-xml
+        - php7.0-zip
+        - php7.0-cli
+        - php7.0-bcmath
+
+    - name: Install MySQL DB server
+      become: true
+      apt:
+        name: mysql-server
+        state: latest
+
+    - name: Install Nginx
+      apt:
+       name: nginx
+       state: latest
+
+    - name: install apache2
+      apt: 
+       name: apache2 
+       state: latest
